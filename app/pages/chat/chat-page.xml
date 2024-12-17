@@ -1,0 +1,34 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <ActionBar class="action-bar" flat="true">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+        <StackLayout orientation="horizontal" class="action-bar-title">
+            <Image src="{{ profileImage }}" class="w-8 h-8 rounded-sm" />
+            <Label text="{{ chatName }}" class="ml-2 font-medium" />
+        </StackLayout>
+        <ActionItem ios.position="right" android.position="right">
+            <Label text="&#xf142;" class="fas" fontSize="20" />
+        </ActionItem>
+    </ActionBar>
+
+    <GridLayout rows="*, auto">
+        <!-- Messages List -->
+        <ListView row="0" items="{{ messages }}" class="bg-gray-50">
+            <ListView.itemTemplate>
+                <GridLayout columns="*" class="p-2">
+                    <StackLayout
+                        class="{{ senderId === $parent.currentUserId ? 'message-bubble message-bubble-sent' : 'message-bubble message-bubble-received' }}">
+                        <Label text="{{ content.original }}" textWrap="true" class="text-base" />
+                        <Label text="{{ content.translated }}" textWrap="true" class="text-sm opacity-75 mt-1" />
+                        <Label text="{{ timestamp | date: 'HH:mm' }}" class="text-xs opacity-50 mt-1" />
+                    </StackLayout>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <!-- Message Input -->
+        <GridLayout row="1" columns="*, auto" class="p-4 bg-white border-t border-gray-100">
+            <TextField col="0" text="{{ messageText }}" hint="Type a message..." class="input" />
+            <Button col="1" text="Send" class="btn btn-primary ml-2" tap="sendMessage" />
+        </GridLayout>
+    </GridLayout>
+</Page>

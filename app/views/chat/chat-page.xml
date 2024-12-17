@@ -1,0 +1,25 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+  <ActionBar title="{{ chatName }}" class="bg-blue-500 text-white">
+    <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+  </ActionBar>
+
+  <GridLayout rows="*, auto">
+    <ListView row="0" items="{{ messages }}" class="bg-gray-100">
+      <ListView.itemTemplate>
+        <GridLayout columns="*" class="p-2">
+          <StackLayout class="{{ senderId === currentUserId ? 'ml-auto bg-blue-200' : 'mr-auto bg-white' }} rounded-lg p-3 max-w-3/4">
+            <Label text="{{ originalText }}" textWrap="true" class="text-base" />
+            <Label text="{{ translatedText }}" textWrap="true" class="text-sm text-gray-500" />
+            <Label text="{{ timestamp | dateFormat }}" class="text-xs text-gray-400" />
+          </StackLayout>
+        </GridLayout>
+      </ListView.itemTemplate>
+    </ListView>
+
+    <GridLayout row="1" columns="auto, *, auto" class="bg-white p-2 border-t border-gray-200">
+      <Button col="0" text="🎤" class="w-10 h-10 rounded-full" tap="{{ startVoiceRecording }}" />
+      <TextField col="1" text="{{ messageText }}" hint="Type a message..." class="ml-2 mr-2" />
+      <Button col="2" text="Send" class="bg-blue-500 text-white rounded-full px-4" tap="{{ sendMessage }}" />
+    </GridLayout>
+  </GridLayout>
+</Page>

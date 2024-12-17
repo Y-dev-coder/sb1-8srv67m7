@@ -1,0 +1,42 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <ActionBar title="Sloopair" class="action-bar" flat="true">
+        <NavigationButton visibility="collapsed" />
+        <ActionItem ios.position="right" android.position="right">
+            <Label text="&#xf142;" class="fas" fontSize="20" verticalAlignment="center" />
+        </ActionItem>
+    </ActionBar>
+    
+    <GridLayout rows="auto, *">
+        <!-- Search Bar -->
+        <GridLayout row="0" columns="auto, *" class="p-4 bg-white border-b border-gray-100">
+            <Label col="0" text="&#xf002;" class="fas text-gray-500 mr-2" />
+            <TextField col="1" hint="Search conversations..." class="input" />
+        </GridLayout>
+
+        <!-- Conversations List -->
+        <ListView row="1" items="{{ conversations }}" class="list-group">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto, *, auto" rows="auto, auto" class="p-4 bg-white border-b border-gray-100">
+                    <!-- Profile Image -->
+                    <Image col="0" rowSpan="2" src="{{ profileImage }}" 
+                           class="w-14 h-14 rounded-sm" />
+                    
+                    <!-- Name and Last Message -->
+                    <StackLayout col="1" row="0" class="ml-4">
+                        <Label text="{{ name }}" class="text-lg font-medium" />
+                        <Label text="{{ lastMessage }}" class="text-sm text-gray-500" textWrap="true" />
+                    </StackLayout>
+                    
+                    <!-- Time -->
+                    <Label col="2" row="0" text="{{ lastMessageTime }}" 
+                           class="text-xs text-gray-400" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <!-- New Chat Button -->
+        <Button row="1" text="+" class="btn btn-primary w-14 h-14 text-2xl rounded-sm" 
+                tap="{{ onNewChat }}" verticalAlignment="bottom" horizontalAlignment="right"
+                margin="16" />
+    </GridLayout>
+</Page>

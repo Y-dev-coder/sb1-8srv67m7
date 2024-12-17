@@ -1,0 +1,6 @@
+{
+  "installDependencies": true,
+  "compileTrigger": "save",
+  "startCommand": "ns preview",
+  "corsProxy": true
+}
